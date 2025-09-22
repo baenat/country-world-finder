@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SearchInputComponent } from "../../components/search-input/search-input.component";
 import { DataListComponent } from "../../components/data-list/data-list.component";
+import { CountryService } from '../../services/country/country.service';
 
 @Component({
   selector: 'app-by-capital',
@@ -10,8 +11,12 @@ import { DataListComponent } from "../../components/data-list/data-list.componen
 })
 export class ByCapitalComponent {
 
-  onEmitSearch(value: string) {
-    console.log({ value });
+  countryService = inject(CountryService);
+
+  onEmitSearch(query: string) {
+    console.log({ value: query });
+
+    this.countryService.getCountryByCapital(query).subscribe(console.log);
   }
 
 }

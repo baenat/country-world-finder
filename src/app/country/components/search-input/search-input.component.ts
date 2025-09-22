@@ -14,7 +14,7 @@ export class SearchInputComponent {
   onSearch(value: string) {
     if (!value) return;
 
-    this.txtValue.emit(value);
+    this.txtValue.emit(value.toLowerCase().trim());
   }
 
 }
