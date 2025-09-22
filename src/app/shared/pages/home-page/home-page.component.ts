@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,5 +8,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
+
+  welcome = signal<string>('Bienvenido');
+  description = signal<string>('¡Viaja con el conocimiento de cada rincón del planeta al alcance de tu mano!');
 
 }

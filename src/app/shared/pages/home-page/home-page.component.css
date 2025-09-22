@@ -1,3 +1,12 @@
 section {
-  background: url('https://npr.brightspotcdn.com/dims4/default/c6d8038/2147483647/strip/true/crop/1500x1064+0+0/resize/1760x1248!/format/webp/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201701%2FMap-countries-istock-ZarkoCvijovic-20170104.jpg');
+  background: url('https://static.vecteezy.com/system/resources/previews/020/833/849/non_2x/world-map-with-country-names-free-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-content {
+  border: 1px solid white;
+  border-radius: 5px 60px 5px 60px;
+  color: white;
 }
