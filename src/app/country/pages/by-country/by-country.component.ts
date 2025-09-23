@@ -1,8 +1,9 @@
 import { Component, inject, resource, signal } from '@angular/core';
 import { SearchInputComponent } from "../../components/search-input/search-input.component";
 import { DataListComponent } from "../../components/data-list/data-list.component";
-import { firstValueFrom } from 'rxjs';
+import { of } from 'rxjs';
 import { CountryService } from '../../services/country/country.service';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-by-country',
@@ -15,16 +16,25 @@ export class ByCountryComponent {
   countryService = inject(CountryService);
   query = signal<string>('');
 
-  userResource = resource({
+  userResource = rxResource({
     request: () => ({ query: this.query() }),
-    loader: async ({ request }) => {
-      if (!request.query) return [];
+    loader: ({ request }) => {
+      if (!request.query) return of([]);
 
-      return firstValueFrom(
-        this.countryService.getCountryByCountry(request.query)
-      )
+      return this.countryService.getCountryByCountry(request.query)
     }
-  })
+  });
+
+  // userResource = resource({
+  //   request: () => ({ query: this.query() }),
+  //   loader: async ({ request }) => {
+  //     if (!request.query) return [];
+
+  //     return firstValueFrom(
+  //       this.countryService.getCountryByCountry(request.query)
+  //     )
+  //   }
+  // })
 
   onEmitSearch(value: string) {
     this.query.set(value);

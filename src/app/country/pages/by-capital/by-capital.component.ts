@@ -2,7 +2,8 @@ import { Component, inject, resource, signal } from '@angular/core';
 import { SearchInputComponent } from "../../components/search-input/search-input.component";
 import { DataListComponent } from "../../components/data-list/data-list.component";
 import { CountryService } from '../../services/country/country.service';
-import { firstValueFrom } from 'rxjs';
+import { of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-by-capital',
@@ -15,15 +16,24 @@ export class ByCapitalComponent {
   countryService = inject(CountryService);
   query = signal<string>('');
 
-  userResource = resource({
+  userResource = rxResource({
     request: () => ({ query: this.query() }),
-    loader: async ({ request }) => {
-      if (!request.query) return [];
+    loader: ({ request }) => {
+      if (!request.query) return of([]);
 
-      return await firstValueFrom(
-        this.countryService.getCountryByCapital(request.query)
-      );
+      return this.countryService.getCountryByCapital(request.query);
     },
   });
+
+  // userResource = resource({
+  //   request: () => ({ query: this.query() }),
+  //   loader: async ({ request }) => {
+  //     if (!request.query) return [];
+
+  //     return await firstValueFrom(
+  //       this.countryService.getCountryByCapital(request.query)
+  //     );
+  //   },
+  // });
 
 }
