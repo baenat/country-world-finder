@@ -1,3 +1,9 @@
 <country-search-input placeholder="Buscar por país" (txtValue)="onEmitSearch($event)" />
 
-<country-data-list [countries]="[]"/>
+@if (userResource.error()) {
+  <h3>{{ userResource.error() }}</h3>
+}
+
+@if (userResource.hasValue()) {
+  <country-data-list [countries]="userResource.value()" />
+}

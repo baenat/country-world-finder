@@ -1,8 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, resource, signal } from '@angular/core';
 import { SearchInputComponent } from "../../components/search-input/search-input.component";
 import { DataListComponent } from "../../components/data-list/data-list.component";
 import { CountryService } from '../../services/country/country.service';
-import { Country } from '../../interfaces/country';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-by-capital',
@@ -13,27 +13,17 @@ import { Country } from '../../interfaces/country';
 export class ByCapitalComponent {
 
   countryService = inject(CountryService);
+  query = signal<string>('');
 
-  isLoading = signal(false);
-  hasError = signal<string | null>(null);
-  countries = signal<Country[]>([]);
+  userResource = resource({
+    request: () => ({ query: this.query() }),
+    loader: async ({ request }) => {
+      if (!request.query) return [];
 
-  onEmitSearch(query: string) {
-    if (this.isLoading()) return;
-
-    this.isLoading.set(true);
-    this.hasError.set(null);
-
-    this.countryService.getCountryByCapital(query).subscribe({
-      next: (resp) => {
-        this.countries.set(resp);
-      },
-      error: (err) => {
-        this.hasError.set(err);
-        this.countries.set([]);
-      },
-      complete: () => this.isLoading.set(false)
-    });
-  }
+      return await firstValueFrom(
+        this.countryService.getCountryByCapital(request.query)
+      );
+    },
+  });
 
 }
