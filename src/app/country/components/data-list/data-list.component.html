@@ -29,6 +29,30 @@
           </td>
         </tr>
       }
+
+      @if (errorMessage()) {
+        <tr>
+          <td colspan="8" class="text-center text-red-500">
+            {{ errorMessage() }}
+          </td>
+        </tr>
+      }
+
+      @if (isLoading()) {
+        <tr>
+          <td colspan="8" class="text-center text-secondary">
+            Cargando información ...
+          </td>
+        </tr>
+      }
+
+      @if (isEmpty() && !isLoading()) {
+        <tr>
+          <td colspan="8" class="text-center text-primary">
+            No se encontró información
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </section>

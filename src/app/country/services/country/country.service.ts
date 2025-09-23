@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { GeneralService } from '../../../shared/services/general/general.service';
 import { CountryMapper } from '../../mappers/country.mapper';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, throwError } from 'rxjs';
 import { RESTCountry } from '../../interfaces/rest-country.interface';
 import { Country } from '../../interfaces/country';
 
@@ -17,6 +17,7 @@ export class CountryService {
   getCountryByCapital(query: string): Observable<Country[]> {
     return this.generalService.get<RESTCountry[]>(`${API_URL}/capital/${query}`)
       .pipe(
+        delay(3000),
         map(resp => CountryMapper.restCountryToCountryArray(resp)),
         catchError(error => {
           console.error(`Error: ${error}`);
@@ -32,6 +33,16 @@ export class CountryService {
         catchError(error => {
           console.error(`Error: ${error}`);
           return throwError(() => 'No se logro obtener información')
+        })
+      );
+  }
+
+  getCountryByCode(code: string): Observable<Country[]> {
+    return this.generalService.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
+      .pipe(
+        map(resp => CountryMapper.restCountryToCountryArray(resp)),
+        catchError(error => {
+          return throwError(() => `No se logro obtener información con code: ${code}`)
         })
       );
   }
