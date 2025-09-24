@@ -1,0 +1,56 @@
+<!-- Informacion adicional -->
+<section class="flex flex-col">
+  <div class="stats shadow">
+    <div class="stat place-items-center">
+      <div class="stat-title">Nombre</div>
+      <div class="stat-value">{{ country().name }}</div>
+      <div class="stat-desc">{{ country().capital }}</div>
+    </div>
+
+    <div class="stat place-items-center">
+      <div class="stat-title">Población</div>
+      <div class="stat-value text-secondary">{{ country().population | number}}</div>
+      <div class="stat-desc">{{ country().officialName }}</div>
+    </div>
+
+    <div class="stat place-items-center">
+      <div class="stat-title">Región</div>
+      <div class="stat-value">{{ country().region }}</div>
+      <div class="stat-desc">{{ country().subRegion }}</div>
+    </div>
+
+    <div class="stat place-items-center">
+      <div class="stat-title">Escudo de Armas</div>
+      <img [src]="country().coatOfArmsSvg" [alt]="'Escudo de Armas '+ country().name" class="w-15">
+      <div class="stat-desc">{{ country().name }}</div>
+    </div>
+  </div>
+</section>
+
+<!-- Bandera -->
+<section class="mt-10">
+  <figure class="diff aspect-16/9 w-[70%] mx-auto">
+    <div class="diff-item-1">
+      <img [alt]="country().name" [src]="country().flagSvg" class="blur brightness-90" />
+    </div>
+    <div class="diff-item-2">
+      <img [alt]="country().name" [src]="country().flagSvg" />
+    </div>
+    <div class="diff-resizer"></div>
+  </figure>
+</section>
+
+<!-- Fronteras -->
+<section class="flex flex-col my-10">
+  <h1 class="stat-title text-center mb-1">Fronteras</h1>
+  <div class="flex flex-col">
+    <div class="stats">
+      @for (code of country().borders; track code) {
+        <a class="stat place-items-center cursor-pointer" [routerLink]="['/country/by', code]">
+          <div class="stat-value">{{ code }}</div>
+          <img [alt]="code" [src]="getFlagUrl(code)" class="w-15" />
+        </a>
+      }
+    </div>
+  </div>
+</section>
