@@ -1,0 +1,17 @@
+section {
+  button {
+    opacity: 70%;
+    font-weight: 400;
+  }
+
+  button:hover {
+    opacity: 1;
+  }
+
+  button.text-primary {
+    opacity: 1;
+    font-weight: 600;
+    transform: scale(1.17);
+    transition: all .2s ease-in-out;
+  }
+}

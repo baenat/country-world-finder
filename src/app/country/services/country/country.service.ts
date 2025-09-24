@@ -59,4 +59,14 @@ export class CountryService {
         })
       );
   }
+
+  getCountryByRegion(region: string): Observable<Country[]> {
+    return this.generalService.get<RESTCountry[]>(`${API_URL}/region/${region}`)
+      .pipe(
+        map(resp => CountryMapper.restCountryToCountryArray(resp)),
+        catchError(error => {
+          return throwError(() => `No se logro obtener información con la region: ${region}`)
+        })
+      );
+  }
 }
