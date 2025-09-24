@@ -1,2 +1,11 @@
-<p>country works!</p>
-<h1>{{ query() }}</h1>
+@if (conutryResource.error()) {
+  <app-not-found />
+}
+
+@if (conutryResource.isLoading()) {
+  <h1 class="text-3xl text-center mt-50">Cargando ...</h1>
+}
+
+@if (conutryResource.hasValue()) {
+  <country-information [country]="conutryResource.value()"  />
+}

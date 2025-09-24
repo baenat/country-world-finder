@@ -37,10 +37,11 @@ export class CountryService {
       );
   }
 
-  getCountryByCode(code: string): Observable<Country[]> {
+  getCountryByCode(code: string): Observable<Country | undefined> {
     return this.generalService.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
       .pipe(
         map(resp => CountryMapper.restCountryToCountryArray(resp)),
+        map(countries => countries.at(0)),
         catchError(error => {
           return throwError(() => `No se logro obtener información con code: ${code}`)
         })
