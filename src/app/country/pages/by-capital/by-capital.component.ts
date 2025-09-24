@@ -4,6 +4,7 @@ import { DataListComponent } from "../../components/data-list/data-list.componen
 import { CountryService } from '../../services/country/country.service';
 import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-by-capital',
@@ -14,8 +15,10 @@ import { rxResource } from '@angular/core/rxjs-interop';
 export class ByCapitalComponent {
 
   countryService = inject(CountryService);
+  activatedRoute = inject(ActivatedRoute);
   query = signal<string>('');
 
+  queryParam = this.activatedRoute.data.subscribe(console.log)
   userResource = rxResource({
     request: () => ({ query: this.query() }),
     loader: ({ request }) => {

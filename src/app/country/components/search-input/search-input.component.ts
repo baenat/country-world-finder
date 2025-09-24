@@ -1,4 +1,5 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, linkedSignal, output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'country-search-input',
@@ -8,9 +9,13 @@ import { Component, effect, input, output, signal } from '@angular/core';
 })
 export class SearchInputComponent {
 
+  activatedRoute = inject(ActivatedRoute);
+
   placeholder = input.required<string>();
   txtValue = output<string>();
-  inputValue = signal<string>('')
+
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+  inputValue = linkedSignal<string>(() => this.queryParam);
 
   onSearch(value: string) {
     if (!value) return;

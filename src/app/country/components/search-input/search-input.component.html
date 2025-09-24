@@ -5,7 +5,8 @@
     class="input inpur-border mr-2 w-60"
     autofocus #txtSearch
     (keyup.enter)="onSearch(txtSearch.value)"
-    (keyup)="inputValue.set(txtSearch.value)">
+    (keyup)="inputValue.set(txtSearch.value)"
+    [value]="inputValue()">
 
   <button class="btn btn-primary" (click)="onSearch(txtSearch.value)">Buscar</button>
 </section>
