@@ -18,7 +18,6 @@ export class ByCapitalComponent {
   activatedRoute = inject(ActivatedRoute);
   query = signal<string>('');
 
-  queryParam = this.activatedRoute.data.subscribe(console.log)
   userResource = rxResource({
     request: () => ({ query: this.query() }),
     loader: ({ request }) => {

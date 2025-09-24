@@ -1,5 +1,5 @@
 import { Component, effect, inject, input, linkedSignal, output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'country-search-input',
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SearchInputComponent {
 
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
 
   placeholder = input.required<string>();
   txtValue = output<string>();
@@ -24,10 +25,12 @@ export class SearchInputComponent {
   }
 
   debounceTime = effect((onCleanup) => {
-    const value = this.inputValue();
+    const value = this.toLowerCase(this.inputValue());
+    if (!value) return;
 
     const timeout = setTimeout(() => {
-      this.txtValue.emit(this.toLowerCase(value));
+      this.updateQueryParams(value);
+      this.txtValue.emit(value);
     }, 300);
 
     onCleanup(() => {
@@ -36,5 +39,14 @@ export class SearchInputComponent {
   });
 
   toLowerCase = (value: string) => value.toLowerCase().trim();
+
+  updateQueryParams(value: string) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        query: value
+      }
+    });
+  }
 
 }
