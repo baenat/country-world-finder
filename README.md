@@ -186,4 +186,4 @@ Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 **Tu Nombre**
 - GitHub: [@baenat](https://github.com/baenat)
-- LinkedIn: [Tu Perfil](https://linkedin.com/in/julian-baena)
+- LinkedIn: [Julian Baena](https://linkedin.com/in/julian-baena)
