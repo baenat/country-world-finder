@@ -1,0 +1,7 @@
+<country-select-region (region)="region.set($event)" />
+
+<country-data-list
+  [countries]="countryResource.value() ?? []"
+  [isLoading]="countryResource.isLoading()"
+  [isEmpty]="countryResource.value()?.length === 0"
+  [errorMessage]="countryResource.error()" />

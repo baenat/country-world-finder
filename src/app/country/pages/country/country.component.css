@@ -1,0 +1,7 @@
+section a {
+  position: relative;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px 0;
+  transition: .5s ease;
+}

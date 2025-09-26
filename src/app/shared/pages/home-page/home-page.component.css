@@ -1,0 +1,12 @@
+section {
+  background: url('https://img.freepik.com/vector-premium/mapa-mundo-moderno_275806-275.jpg?semt=ais_incoming&w=740&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-content {
+  border: 1px solid white;
+  border-radius: 5px 60px 5px 60px;
+  color: white;
+}

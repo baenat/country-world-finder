@@ -1,0 +1,7 @@
+<country-search-input placeholder="Buscar por país" (txtValue)="onEmitSearch($event)" />
+
+<country-data-list
+  [countries]="userResource.value() ?? []"
+  [errorMessage]="userResource.error()"
+  [isLoading]="userResource.isLoading()"
+  [isEmpty]="userResource.value()?.length === 0" />
