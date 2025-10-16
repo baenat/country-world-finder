@@ -41,7 +41,7 @@ npm install -g @angular/cli@19
 
 1. **Clona el repositorio**
    ```bash
-   git clone [https://github.com/baenat/worldfinder](https://github.com/baenat/country-world-finder).git
+   git clone https://github.com/baenat/country-world-finder.git
    cd country-world-finder
    ```
 
